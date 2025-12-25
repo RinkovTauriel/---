@@ -22,7 +22,6 @@ class CapitalTurnoverMod(loader.Module):
         "calculate_button": "🧮 Сделать расчет",
         "test_button": "📋 Примеры из задания",
         "back_button": "🔙 Назад",
-        "close_button": "❌ Закрыть",
         "calculate_text": (
             "🧮 <b>Введите данные для расчета</b>\n\n"
             "<b>Формат команды:</b>\n"
@@ -243,8 +242,7 @@ class CapitalTurnoverMod(loader.Module):
                 text=result_text,
                 reply_markup=[
                     [{"text": "🔄 Новый расчет", "callback": self._show_calculate_menu}],
-                    [{"text": "📋 Примеры", "callback": self._show_test_menu}],
-                    [{"text": "❌ Закрыть", "callback": self._close_menu}]
+                    [{"text": "📋 Примеры", "callback": self._show_test_menu}]
                 ],
                 ttl=60*60*24
             )
@@ -279,8 +277,7 @@ class CapitalTurnoverMod(loader.Module):
         await call.edit(
             self.strings["calculate_text"],
             reply_markup=[
-                [{"text": self.strings["back_button"], "callback": self._back_to_menu}],
-                [{"text": self.strings["close_button"], "callback": self._close_menu}]
+                [{"text": self.strings["back_button"], "callback": self._back_to_menu}]
             ]
         )
 
@@ -295,8 +292,7 @@ class CapitalTurnoverMod(loader.Module):
                 {"text": self.strings["test_my_data"], "callback": self._show_my_test}
             ],
             [
-                {"text": self.strings["back_button"], "callback": self._back_to_menu},
-                {"text": self.strings["close_button"], "callback": self._close_menu}
+                {"text": self.strings["back_button"], "callback": self._back_to_menu}
             ]
         ]
         
@@ -320,13 +316,6 @@ class CapitalTurnoverMod(loader.Module):
             self.strings["menu_text"],
             reply_markup=buttons
         )
-
-    async def _close_menu(self, call):
-        """Закрыть меню"""
-        try:
-            await call.delete()
-        except:
-            pass
 
     async def _run_test_1(self, call):
         """Запустить тест 1 (пример из задания)"""
@@ -365,8 +354,7 @@ class CapitalTurnoverMod(loader.Module):
                 error_text,
                 reply_markup=[
                     [{"text": "🔙 Назад к примерам", "callback": self._show_test_menu}],
-                    [{"text": "🏠 В меню", "callback": self._back_to_menu}],
-                    [{"text": "❌ Закрыть", "callback": self._close_menu}]
+                    [{"text": "🏠 В меню", "callback": self._back_to_menu}]
                 ]
             )
             return
@@ -378,8 +366,7 @@ class CapitalTurnoverMod(loader.Module):
             result_text,
             reply_markup=[
                 [{"text": "🔙 Назад к примерам", "callback": self._show_test_menu}],
-                [{"text": "🏠 В меню", "callback": self._back_to_menu}],
-                [{"text": "❌ Закрыть", "callback": self._close_menu}]
+                [{"text": "🏠 В меню", "callback": self._back_to_menu}]
             ]
         )
 
